@@ -1,12 +1,12 @@
 /*
-Theme Name: Twenty Ten Headless
-Theme URI: http://kunsttechnikeinheit.com
-Description: A Headless Child Theme for Twenty Ten
+Theme Name: M18
+Theme URI: http://m18.bau-ha.us
+Description: A Child Theme for Twenty Ten
 Version: 1.0
 Author: eins78
 Author URI: http://i78.me
 Template: twentyten
-Tags: twentyten, video, videoblog
+Tags: twentyten
 */
 
 /* Inherit the default theme styles */
@@ -27,8 +27,7 @@ color: #eee;
 
 */
 
-div.entry-meta, div#access, .entry-utility-prep {
-visibility: hidden;
+.page-id-114 .entry-title{
 display: none;
 }
 
@@ -49,3 +48,11 @@ h1.page-title, h1.page-title span { font-size: 28px; !important; }
 .category-weimar-filmpreis h1.page-title, 
 .category-sonderpreis-europa h1.page-title, 
 .category-sonderpreis-unicato-music h1.page-title { background-repeat: no-repeat; padding-bottom: 0px; padding-top: 75px; background-image: url(http://video.bau-ha.us/files/unicatoheader.png); }
+
+.widget-title {
+font-style: normal;
+}
+
+.widget-area .hentry {
+margin: 0;
+}
