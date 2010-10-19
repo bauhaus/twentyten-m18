@@ -1,0 +1,51 @@
+/*
+Theme Name: Twenty Ten Headless
+Theme URI: http://kunsttechnikeinheit.com
+Description: A Headless Child Theme for Twenty Ten
+Version: 1.0
+Author: eins78
+Author URI: http://i78.me
+Template: twentyten
+Tags: twentyten, video, videoblog
+*/
+
+/* Inherit the default theme styles */
+@import url( ../twentyten/style.css );
+
+/*
+#wrapper {
+background:#000!important;
+}
+
+body {
+background:#111!important;
+color:#eee!important;
+}
+#site-title a, #content .entry-title, #content, #content input, #content textarea, .entry-title a:link, .entry-title a:visited {
+color: #eee;
+}
+
+*/
+
+div.entry-meta, div#access, .entry-utility-prep {
+visibility: hidden;
+display: none;
+}
+
+div#branding img {
+height: 0px;
+}
+
+h2 + h3 { margin-top: -25px !important; }
+h3 {  font-style: italic;  }
+
+div + pre { margin-top: 25px !important; }
+h1.page-title, h1.page-title span { font-size: 28px; !important; }
+.category-unicato-award-2010-nominierungen h1.page-title,  
+.category-bester-experimentalfilm h1.page-title, 
+.category-bester-animationsfilm h1.page-title, 
+.category-bester-dokumentarfilm h1.page-title, 
+.category-bester-spielfilm h1.page-title, 
+.category-weimar-filmpreis h1.page-title, 
+.category-sonderpreis-europa h1.page-title, 
+.category-sonderpreis-unicato-music h1.page-title { background-repeat: no-repeat; padding-bottom: 0px; padding-top: 75px; background-image: url(http://video.bau-ha.us/files/unicatoheader.png); }
