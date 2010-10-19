@@ -175,3 +175,5 @@ function m18_register_post_types()
   register_post_type('m18_protokoll',$m18_protokoll_args);
   register_post_type('m18_termin',$m18_termin_args);
 }
+
+include 'different-type/different-type.php';
