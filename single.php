@@ -155,6 +155,6 @@ $cat_Referate = get_cat_ID('Referate');
 			<?php } ?>
 
 			</ul>
-		</div><!-- #primary .widget-areaa -->
+		</div><!-- #primary .widget-area -->
 
 <?php get_footer(); ?>
