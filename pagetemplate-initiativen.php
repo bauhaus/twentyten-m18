@@ -30,9 +30,23 @@
 <?php endwhile; ?>
 
 <!-- List post from category same as page -->
-<h1 class="page-title"><span>Alle Nachrichten der Initiativen des StuKo</span></h1>
-
+<h1 style="clear: none; float: left;" class="page-title"><span>Alle Nachrichten der Initiativen des StuKo</span></h1>
 <?php 
+
+if ( current_user_can('edit_post') ) { ?>
+
+	<h2 style="
+		clear: none;
+		float: right;
+		line-height: 1.9em;
+	"><a style="text-decoration: none;" href="
+		javascript:var d=document,w=window,e=w.getSelection,k=d.getSelection,x=d.selection,s=(e?e():(k)?k():(x?x.createRange().text:0)),f='',l=d.location,e=encodeURIComponent,u='http://m18.bau-ha.us/wp-admin/press-this.php?u=&t=&s=&v=4';a=function(){if(!w.open(u,'t','toolbar=0,resizable=1,scrollbars=1,status=1,width=810,height=570'))l.href=u;};if (/Firefox/.test(navigator.userAgent)) setTimeout(a, 0); else a();void(0)
+	" title="M18 - Neuer Beitrag">&#8853; Neuer Beitrag</a></h2>
+	<h3 style="float: right;width: 23%;"><small>(Nicht vergessen: Richtige Kategorie anklicken. Sorry!)</small></h3>
+	
+<?php
+}
+ 
 $catID = get_cat_ID('Initiativen');
 $args=array(
   'cat' => $catID,
