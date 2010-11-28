@@ -115,65 +115,286 @@ function twentyten_m18_setup() {
 }
 endif;
 
-add_action('init', 'm18_register_post_types');
-function m18_register_post_types() 
-{
-  $m18_protokoll_labels = array(
-    'name' => _x('Protokolle', 'post type general name'),
-    'singular_name' => _x('Protokoll', 'post type singular name'),
-    'add_new' => _x('Neues', 'm18_protokoll'),
-    'add_new_item' => __('Neues Protokoll hinzufŸgen'),
-    'edit_item' => __('Protokoll bearbeiten'),
-    'new_item' => __('Neues Protokoll'),
-    'view_item' => __('Protokoll ansehen'),
-    'search_items' => __('Protokolle suchen'),
-    'not_found' =>  __('Keine Protokoll gefunden'),
-    'not_found_in_trash' => __('Keine Protokoll im Trash gefunden'), 
-    'parent_item_colon' => ''
-  );
-  $m18_protokoll_args = array(
-  	'description' => ( 'Protokolle der M18' ),
-    'labels' => $m18_protokoll_labels,
-    'public' => true,
-    'publicly_queryable' => true,
-    'show_ui' => true, 
-    'query_var' => true,
-    'rewrite' => array( 'slug' => 'protokoll' ),
-    'capability_type' => 'post',
-    'hierarchical' => false,
-    'menu_position' => null,
-    'supports' => array('title','author', 'revisions' ),
-    'menu_position' => ( '6' )
-  ); 
-  $m18_termin_labels = array(
-    'name' => _x('Termine', 'post type general name'),
-    'singular_name' => _x('Termin', 'post type singular name'),
-    'add_new' => _x('Neuer', 'm18_termin'),
-    'add_new_item' => __('Neuen Termin hinzufŸgen'),
-    'edit_item' => __('Termin bearbeiten'),
-    'new_item' => __('Neuer Termin'),
-    'view_item' => __('Termin ansehen'),
-    'search_items' => __('Termine suchen'),
-    'not_found' =>  __('Keine Termine gefunden'),
-    'not_found_in_trash' => __('Keine Termine im Trash gefunden'), 
-    'parent_item_colon' => ''
-  );
-  $m18_termin_args = array(
-  	'description' => ( 'Termine der M18' ),
-    'labels' => $m18_termin_labels,
-    'public' => true,
-    'publicly_queryable' => true,
-    'show_ui' => true, 
-    'query_var' => true,
-    'rewrite' => array( 'slug' => 'termin' ),
-    'capability_type' => 'post',
-    'hierarchical' => false,
-    'menu_position' => null,
-    'supports' => array('title','editor','author', 'revisions' ),
-    'menu_position' => ( '5' )
-  ); 
-  register_post_type('m18_protokoll',$m18_protokoll_args);
-  register_post_type('m18_termin',$m18_termin_args);
+// The height and width of our header images
+add_filter('twentyten_header_image_height','m18_header_height');
+add_filter('twentyten_header_image_width','m18_header_width');
+function m18_header_height($size){
+   return 150;
+}
+function m18_header_width($size){
+   return 940;
+}
+   
+// Remove default twentyten header images
+// source: http://aaron.jorb.in/blog/2010/07/remove-all-default-header-images-in-a-twenty-ten-child-theme/
+function m18_remove_twenty_ten_headers(){ 
+	unregister_default_headers( array(
+		'berries',
+		'cherryblossom',
+		'concave',
+		'fern',
+		'forestfloor',
+		'inkwell',
+		'path' ,
+		'sunset')
+	);
+}
+add_action( 'after_setup_theme', 'm18_remove_twenty_ten_headers', 11 );
+
+// adding our header images
+function m18_add_headers(){ 
+
+//	$dir = '%s/../twentyten-m18/images/headers/';
+	
+	/* get content of directory */
+	$dircontent = scandir($dir);
+
+	/* filter content (crop thumbnails) */
+//	$headers = array();
+
+//	foreach($dircontent as $value){
+//		if( (strcmp($value,'.') == 0) || (strcmp($value,'..') == 0) ) {
+//		} // directory links
+
+
+//		elseif( stristr($value,'-thumbnail.jpg') === TRUE  ){
+//		} // thumbnails
+
+
+//		else {
+//			array_push($headers,$value);
+//		} // all other images
+
+//	}
+
+	/* build register_default_headers */
+//	foreach($headers 
+
+
+	register_default_headers( array (
+		'20001122-22.19-BauIng-Bank-im-Flur.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20001122-22.19-BauIng-Bank-im-Flur.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20001122-22.19-BauIng-Bank-im-Flur-thumbnail.jpg',
+			'description' => __( 'Bau-Ing-Bank im Flur', 'twentyten' )
+		),
+
+		'20091227-23.31-Max-im-Maschinenraum.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20091227-23.31-Max-im-Maschinenraum.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20091227-23.31-Max-im-Maschinenraum-thumbnail.jpg',
+			'description' => __( 'Max im Maschinenraum', 'twentyten' )
+		),
+		
+		'20100000-00.00-Der-Aschenbecher-am-Hintereingang.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Der-Aschenbecher-am-Hintereingang.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Der-Aschenbecher-am-Hintereingang-thumbnail.jpg',
+			'description' => __( 'Der Aschenbecher am Hintereingang', 'twentyten' )
+		),
+		
+		'20100000-00.00-Karaoke-im-S140.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Karaoke-im-S140.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Karaoke-im-S140-thumbnail.jpg',
+			'description' => __( 'Karaoke im S140', 'twentyten' )
+		),
+		
+		'20100000-00.00-Max-beim-gaertnern.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Max-beim-gaertnern.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Max-beim-gaertnern-thumbnail.jpg',
+			'description' => __( 'Max beim gaertnern', 'twentyten' )
+		),
+		
+		'20100000-00.00-Micha-im-Garten.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Micha-im-Garten.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Micha-im-Garten-thumbnail.jpg',
+			'description' => __( 'Micha im Garten', 'twentyten' )
+		),
+		
+		'20100000-00.00-Michi-und-Eick-im-Garten.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Michi-und-Eick-im-Garten.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20100000-00.00-Michi-und-Eick-im-Garten-thumbnail.jpg',
+			'description' => __( 'Michi und Eick im Garten', 'twentyten' )
+		),
+		
+		'20100000-03.41-Martin-im-Maschinenraum.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20100000-03.41-Martin-im-Maschinenraum.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20100000-03.41-Martin-im-Maschinenraum-thumbnail.jpg',
+			'description' => __( 'Martin im Maschinenraum', 'twentyten' )
+		),
+		
+		'20100400-00.00-Der-Kickerraum-waehrend-der-Renovierung.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20100400-00.00-Der-Kickerraum-waehrend-der-Renovierung.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20100400-00.00-Der-Kickerraum-waehrend-der-Renovierung-thumbnail.jpg',
+			'description' => __( 'Der Kickerraum waehrend der Renovierung', 'twentyten' )
+		),
+		
+		'20100400-00.00-Martin-und-Martin-beim-Renovieren-des-S140.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20100400-00.00-Martin-und-Martin-beim-Renovieren-des-S140.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20100400-00.00-Martin-und-Martin-beim-Renovieren-des-S140-thumbnail.jpg',
+			'description' => __( 'Martin und Martin beim Renovieren des S140', 'twentyten' )
+		),
+		
+		'20101119-18.45-Kochen-auf-StuKo-Klausurtagung.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101119-18.45-Kochen-auf-StuKo-Klausurtagung.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101119-18.45-Kochen-auf-StuKo-Klausurtagung-thumbnail.jpg',
+			'description' => __( 'Kochen auf StuKo Klausurtagung', 'twentyten' )
+		),
+		
+		'20101119-20.28-Abendessen-auf-StuKo-Klausurtagung.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101119-20.28-Abendessen-auf-StuKo-Klausurtagung.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101119-20.28-Abendessen-auf-StuKo-Klausurtagung-thumbnail.jpg',
+			'description' => __( 'Abendessen auf StuKo Klausurtagung', 'twentyten' )
+		),
+		
+		'20101120-11.09-StuKo-Klausurtagung-in-Friedrichroda.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101120-11.09-StuKo-Klausurtagung-in-Friedrichroda.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101120-11.09-StuKo-Klausurtagung-in-Friedrichroda-thumbnail.jpg',
+			'description' => __( 'StuKo Klausurtagung in Friedrichroda', 'twentyten' )
+		),
+		
+		'20101120-15.23-Max-auf-Klausurtagung.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101120-15.23-Max-auf-Klausurtagung.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101120-15.23-Max-auf-Klausurtagung-thumbnail.jpg',
+			'description' => __( 'Max auf Klausurtagung', 'twentyten' )
+		),
+		
+		'20101120-17.44-StuKo-Klausurtagung-in-Friedrichroda.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101120-17.44-StuKo-Klausurtagung-in-Friedrichroda.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101120-17.44-StuKo-Klausurtagung-in-Friedrichroda-thumbnail.jpg',
+			'description' => __( 'StuKo Klausurtagung in Friedrichroda', 'twentyten' )
+		),
+		
+		'20101122-21.05-Kicker.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-21.05-Kicker.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-21.05-Kicker-thumbnail.jpg',
+			'description' => __( 'Kicker', 'twentyten' )
+		),
+		
+		'20101122-21.13-StuKo-Buero.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-21.13-StuKo-Buero.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-21.13-StuKo-Buero-thumbnail.jpg',
+			'description' => __( 'StuKo Buero', 'twentyten' )
+		),
+		
+		'20101122-21.14-StuKo-Buero.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-21.14-StuKo-Buero.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-21.14-StuKo-Buero-thumbnail.jpg',
+			'description' => __( 'StuKo Buero', 'twentyten' )
+		),
+		
+		'20101122-21.19-Till-und-Martin-im-Eingang.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-21.19-Till-und-Martin-im-Eingang.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-21.19-Till-und-Martin-im-Eingang-thumbnail.jpg',
+			'description' => __( 'Till und Martin im Eingang', 'twentyten' )
+		),
+		
+		'20101122-21.20-StuKo-Sitzung.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-21.20-StuKo-Sitzung.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-21.20-StuKo-Sitzung-thumbnail.jpg',
+			'description' => __( 'StuKo Sitzung', 'twentyten' )
+		),
+		
+		'20101122-21.50-Das-Treppenhaus-und-Christian.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-21.50-Das-Treppenhaus-und-Christian.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-21.50-Das-Treppenhaus-und-Christian-thumbnail.jpg',
+			'description' => __( 'Das Treppenhaus und Christian', 'twentyten' )
+		),
+		
+		'20101122-21.52-Tisch-nach-der-StuKo-Sitzung.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-21.52-Tisch-nach-der-StuKo-Sitzung.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-21.52-Tisch-nach-der-StuKo-Sitzung-thumbnail.jpg',
+			'description' => __( 'Tisch nach der StuKo Sitzung', 'twentyten' )
+		),
+		
+		'20101122-22.09-Abends-im-S140.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-22.09-Abends-im-S140.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-22.09-Abends-im-S140-thumbnail.jpg',
+			'description' => __( 'Abends im S140', 'twentyten' )
+		),
+		
+		'20101122-22.28-Maschinenraum.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-22.28-Maschinenraum.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-22.28-Maschinenraum-thumbnail.jpg',
+			'description' => __( 'Maschinenraum', 'twentyten' )
+		),
+		
+		'20101122-22.52-KTW.jpg' => array (
+			'url' => '%s/../twentyten-m18/images/headers/20101122-22.52-KTW.jpg',
+			'thumbnail_url' => '%s/../twentyten-m18/images/headers/20101122-22.52-KTW-thumbnail.jpg',
+			'description' => __( 'KTW', 'twentyten' )
+		)
+		
+	) );
+}
+add_action( 'after_setup_theme', 'm18_add_headers', 12 );
+
+
+/*
+Plugin Name: Twenty Ten Header Rotator
+Plugin URI: http://hungrycoder.xenexbd.com/scripts/header-image-rotator-for-twenty-ten-theme-of-wordpress-3-0.html
+Description: Rotate header images for Twenty Ten theme
+Author: The HungryCoder
+Version: 1.2
+Author URI: http://hungrycoder.xenexbd.com
+*/
+
+if(!is_admin()){
+	add_filter('theme_mod_header_image','hr_rotate');
 }
 
-include 'different-type/different-type.php';
+
+function hr_rotate(){
+	require (ABSPATH.'/wp-admin/custom-header.php');
+	$hr = new Custom_Image_Header(null);
+	$hr->process_default_headers();
+	$all_headers=array();
+	$i=0;
+	foreach (array_keys($hr->default_headers) as $header){
+		$all_headers[$i]['url']= sprintf( $hr->default_headers[$header]['url'], get_template_directory_uri(), get_stylesheet_directory_uri() );
+		//$all_headers[$i]['thumbnail']= sprintf( $hr->default_headers[$header]['thumbnail_url'], get_template_directory_uri(), get_stylesheet_directory_uri() );
+		//$all_headers[$i]['description']= $hr->default_headers[$header]['description'];
+		$i++;
+	}
+
+	//add any custom header
+	$custom = get_option('mods_Twenty Ten');
+	if(is_array($custom)){
+		if(!empty($custom['header_image']))	$all_headers[]['url']= $custom['header_image'];
+	}
+
+	$cur_header = $all_headers[rand(0,count($all_headers)-1)];
+
+	return $cur_header['url'];
+}
+   
+/**
+ * Plugin Name: Twenty Ten IE6 Menus
+ * Author: Sara Cannon
+ * Author URI: http://sara-cannon.com
+ * Description: Make the menu drop down in IE6 in Twentyten (if you care about that sort of thing)
+ * Version: 1.0
+ * License: GPL2
+ */
+function sara_twentyten_ie6_menus_enqueue() {
+    wp_enqueue_script( 'jquery' );
+}
+add_action( 'after_setup_theme', 'sara_twentyten_ie6_menus_enqueue' );
+
+function sara_twentyten_ie6_menus_script() {
+?>
+<!--[if lte IE 6]>
+<script type="text/javascript">
+jQuery(document).ready( function($) {
+    $('#access li').mouseover( function() {
+        $(this).find('ul').show();
+    });
+    $('#access li').mouseleave( function() {
+        $(this).find('ul').hide();
+    });
+    $('#access li ul').mouseleave( function() {
+        $(this).hide();
+    });
+});
+</script>
+<![endif]-->
+<?php
+}
+add_action( 'wp_footer', 'sara_twentyten_ie6_menus_script' );

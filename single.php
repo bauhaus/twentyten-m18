@@ -10,6 +10,7 @@
 get_header(); 
 
 $cat_Architektur = get_cat_ID('Architektur');
+$cat_Fachschaft = get_cat_ID('Fachschaft');
 $cat_Bauingenieurwesen = get_cat_ID('Bauingenieurwesen');
 $cat_Gestaltung = get_cat_ID('Gestaltung');
 $cat_Medien = get_cat_ID('Medien');
@@ -24,8 +25,10 @@ $cat_Referate = get_cat_ID('Referate');
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 			
 			<?php
-			$category = get_the_category(); 
-			$category_description = $category[0]->category_description;
+			$category_ID = get_the_category(); 
+			$category_link = get_category_link( $category_ID );
+			$category_description = $category_ID[0]->category_description;
+			
 			if ( ! empty( $category_description ) )
 				echo '<h1 class="page-title"><span>' . $category_description . '<span></h1>';
 			?>
@@ -86,7 +89,10 @@ $cat_Referate = get_cat_ID('Referate');
 			<ul class="xoxo">
 			
 			<?php
-			if ( in_category($cat_Architektur) ) {
+			if ( in_category($cat_Fachschaft) ) {
+				dynamic_sidebar( 'fachschaft-widget-area' );
+				
+			} elseif ( in_category($cat_Architektur) ) {
 				dynamic_sidebar( 'fachschaft-a-widget-area' );
 				
 			} elseif ( in_category($cat_Bauingenieurwesen) ) {

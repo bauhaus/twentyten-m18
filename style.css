@@ -9,45 +9,40 @@ Template: twentyten
 Tags: twentyten
 */
 
+/* Import Fonts from Google */
+@import url(http://fonts.googleapis.com/css?family=Inconsolata&subset=latin);
+@import url(http://fonts.googleapis.com/css?family=Vollkorn:regular,italic,bold,bolditalic&subset=latin);
+
 /* Inherit the default theme styles */
 @import url( ../twentyten/style.css );
 
-/*
-#wrapper {
-background:#000!important;
-}
-
 body {
-background:#111!important;
-color:#eee!important;
-}
-#site-title a, #content .entry-title, #content, #content input, #content textarea, .entry-title a:link, .entry-title a:visited {
-color: #eee;
+  font-family: 'Vollkorn', serif;
 }
 
-*/
+.tag-protokoll {
+	font-family: 'Inconsolata', Monaco, 'Courier New', monospace;
+}
+.tag-protokoll ul{
+	margin-left:0;;
+}
 
 .page-id-114 .entry-title{
 display: none;
 }
 
+/*
 div#branding img {
 height: 0px;
 }
+*/
 
 h2 + h3 { margin-top: -25px !important; }
 h3 {  font-style: italic;  }
+#content h4 {  margin-top: 3em;  }
 
 div + pre { margin-top: 25px !important; }
 h1.page-title, h1.page-title span { font-size: 28px; !important; }
-.category-unicato-award-2010-nominierungen h1.page-title,  
-.category-bester-experimentalfilm h1.page-title, 
-.category-bester-animationsfilm h1.page-title, 
-.category-bester-dokumentarfilm h1.page-title, 
-.category-bester-spielfilm h1.page-title, 
-.category-weimar-filmpreis h1.page-title, 
-.category-sonderpreis-europa h1.page-title, 
-.category-sonderpreis-unicato-music h1.page-title { background-repeat: no-repeat; padding-bottom: 0px; padding-top: 75px; background-image: url(http://video.bau-ha.us/files/unicatoheader.png); }
 
 .widget-title {
 font-style: normal;
